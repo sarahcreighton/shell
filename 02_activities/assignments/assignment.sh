@@ -9,15 +9,15 @@ set -x
 # project name and a brief description of the project.
 # Then it unzips the raw data provided by the client.
 
-if [ -d newproject ]; then
+if [ -d newproject ]; then # if dir exists
   echo "Recreating the newproject directory"
-  rm -rf newproject
+  rm -rf newproject # force recursive delete
 fi
-mkdir newproject
+mkdir newproject # reset project dir
 cd newproject
 
 mkdir analysis output
-touch README.md
+#touch README.md # commented out; std out has same effect
 echo "# Project Name: DSI Consulting Inc." > README.md
 touch analysis/main.py
 
@@ -38,8 +38,7 @@ mv ./rawdata ./data/raw/
 ls ./data/raw/
 
 # 4. In ./data/processed, create the following directories: server_logs, user_logs, and event_logs
-mkdir ./data/processed/ # create parent dir
-mkdir ./data/processed/server_logs ./data/processed/user_logs ./data/processed/event_logs
+mkdir -p ./data/processed/server_logs ./data/processed/user_logs ./data/processed/event_logs
 
 # 5. Copy all server log files (files with "server" in the name AND a .log extension) from ./data/raw to ./data/processed/server_logs
 cp ./data/raw/server*.log ./data/processed/server_logs/
